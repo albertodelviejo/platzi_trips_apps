@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:platzi_trips_app/description_place.dart';
+import 'package:platzi_trips_app/header_appbar.dart';
+import 'package:platzi_trips_app/review_list.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light));
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   String dummyText =
@@ -16,11 +24,18 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Scaffold(
-          appBar: AppBar(
-            title: Text("Platzi"),
-          ),
-          body: new DescriptionPlace("Bahamas", 4, dummyText),
-        ));
+            body: Stack(
+          children: <Widget>[
+            ListView(
+              children: <Widget>[
+                DescriptionPlace("Bahamas", 4, dummyText),
+                ReviewList()
+              ],
+            ),
+            HeaderAppBar()
+          ],
+        )));
+    //new DescriptionPlace("Bahamas", 4, dummyText)));
   }
 }
 
